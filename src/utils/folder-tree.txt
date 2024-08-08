@@ -1,0 +1,35 @@
+src/
+  ├── api/
+  │   ├── models/
+  │   │   ├── model1.js
+  │   │   └── model2.js
+  │   ├── api_service.js
+  │   └── index.js 
+  ├── controllers/
+  │   ├── data_controller.js
+  │   └── auth_controller.js
+  ├── models/
+  │   ├── product.js
+  │   └── user.js
+  ├── views/
+  │   ├── components/
+  │   │   ├── shared/
+  │   │   │   ├── button.js
+  │   │   │   └── input.js
+  │   │   └── screens/
+  │   │       ├── home/
+  │   │       │   ├── home_screen.js
+  │   │       │   └── components/
+  │   │       ├── profile/
+  │   │       │   ├── profile_screen.js
+  │   │       │   └── components/
+  │   │       └── ...
+  │   ├── navigation/
+  │   │   ├── app_navigator.js
+  │   │   ├── stacks/
+  │   │   │   ├── home_stack.js
+  │   │   │   └── profile_stack.js
+  │   │   └── tabs.js
+  │   └── App.js
+  └── utils/
+      └── helpers.js
