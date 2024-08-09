@@ -1,301 +1,249 @@
 import { StyleSheet } from 'react-native';
+import AtomicStyles, { Colors, Typography, Spacing, Borders, Shadows } from './AtomicStyles';
 
 export const globalStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
+    backgroundColor: Colors.white,
+    ...Spacing.large,
   },
   header: {
-    backgroundColor: '#dba669', // Color primario
-    borderRadius: 10,
-    padding: 20,
-    marginBottom: 20,
-    alignItems: 'center',
+    ...AtomicStyles.headerStyle,
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#fff', // Fuente blanca sobre color
+    ...Typography.title,
   },
   subtitle: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 20,
-    color: '#fff', // Fuente blanca sobre color
+    ...Typography.subtitle,
   },
   card: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
-    margin: 5,
+    ...AtomicStyles.roundedContainer,
+    marginBottom: Spacing.small.margin,
   },
   cardContent: {
     flexDirection: 'row',
-    padding: 10,
+    ...Spacing.medium,
   },
   cardTextContainer: {
     flex: 1,
   },
   cardTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    ...Typography.cardTitle,
   },
   cardDescription: {
-    fontSize: 14,
-    marginBottom: 5,
+    ...Typography.cardDescription,
   },
   cardDate: {
-    fontSize: 12,
-    color: '#888',
+    ...Typography.smallText,
   },
   cardImage: {
     width: 80,
     height: 80,
-    borderRadius: 10,
+    ...Borders.rounded,
   },
   errorContainer: {
-    backgroundColor: '#f8d7da',
-    borderRadius: 10,
-    padding: 20,
-    marginBottom: 20,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#d9534f',
-    shadowColor: '#d9534f',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 3,
+    ...AtomicStyles.errorContainer,
   },
   errorTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#d9534f',
-    marginTop: 10,
+    ...Typography.title,
+    color: Colors.errorBorder,
+    marginTop: Spacing.small.margin,
   },
   errorText: {
-    fontSize: 16,
-    color: '#721c24',
-    textAlign: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+    ...Typography.subtitle,
+    color: Colors.errorText,
+    marginTop: Spacing.small.margin,
+    marginBottom: Spacing.large.margin,
   },
   reloadButton: {
-    backgroundColor: '#d9534f',
-    borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    ...AtomicStyles.primaryBackground,
+    ...Borders.rounded,
+    paddingVertical: Spacing.small.padding,
+    paddingHorizontal: Spacing.medium.padding,
     alignItems: 'center',
   },
   reloadButtonText: {
-    fontSize: 16,
-    color: '#fff',
+    ...Typography.subtitle,
+    color: Colors.white,
     fontWeight: 'bold',
   },
   noEventsContainer: {
-    backgroundColor: '#e9ecef',
-    borderRadius: 10,
-    padding: 20,
-    marginBottom: 20,
+    backgroundColor: Colors.errorBackground,
+    ...Borders.rounded,
+    ...Spacing.large,
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ced4da',
-    shadowColor: '#6c757d',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 3,
+    ...Borders.bordered,
+    ...Shadows.shadowMedium,
   },
   noEventsTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#6c757d',
-    marginTop: 10,
+    ...Typography.title,
+    color: Colors.errorText,
+    marginTop: Spacing.small.margin,
   },
   noEventsText: {
-    fontSize: 16,
+    ...Typography.subtitle,
     color: '#495057',
-    textAlign: 'center',
-    marginTop: 10,
-    marginBottom: 20,
   },
   dateSelectorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#dba669', // Color primario
-    borderRadius: 10,
-    padding: 10,
-    marginTop: 20,
+    ...AtomicStyles.primaryBackground,
+    ...Borders.rounded,
+    ...Spacing.medium,
+    marginTop: Spacing.large.margin,
   },
   dateButton: {
-    padding: 5,
+    ...Spacing.small,
   },
   dateText: {
     fontSize: 18,
-    color: '#fff',
-    marginHorizontal: 10,
+    color: Colors.white,
+    marginHorizontal: Spacing.medium.margin,
   },
   paginationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#dba669', // Color primario
-    borderRadius: 10,
-    padding: 10,
-    marginTop: 20,
+    ...AtomicStyles.primaryBackground,
+    ...Borders.rounded,
+    ...Spacing.medium,
+    marginTop: Spacing.large.margin,
   },
   pageSizeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   pageSizeLabel: {
-    marginRight: 5,
-    color: '#fff',
+    marginRight: Spacing.small.margin,
+    color: Colors.white,
   },
   pageSizeInput: {
     textAlign: 'center',
-    borderColor: '#ccc',
-    color: '#fff',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 5,
+    borderColor: Colors.lightGray,
+    color: Colors.white,
+    ...Borders.bordered,
+    padding: Spacing.small.padding,
     width: 50,
-    marginRight: 5,
+    marginRight: Spacing.small.margin,
   },
   pageNavigation: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   pageInfo: {
-    marginHorizontal: 10,
-    color: '#fff',
+    marginHorizontal: Spacing.medium.margin,
+    color: Colors.white,
   },
   pageButton: {
-    padding: 5,
+    ...Spacing.small,
   },
   section: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 2,
+    ...AtomicStyles.roundedContainer,
+    marginBottom: Spacing.large.margin,
+    ...Shadows.shadowMedium,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: Spacing.small.margin,
   },
   websiteButton: {
-    backgroundColor: '#dba669', // Color primario
-    padding: 10,
-    borderRadius: 5,
+    ...AtomicStyles.primaryBackground,
+    padding: Spacing.medium.padding,
+    ...Borders.rounded,
     alignItems: 'center',
   },
   websiteButtonText: {
-    color: '#fff',
-    fontSize: 16,
+    ...Typography.subtitle,
     fontWeight: 'bold',
   },
   developersList: {
-    marginBottom: 20,
+    marginBottom: Spacing.large.margin,
   },
   developerName: {
     fontSize: 16,
-    marginLeft: 20,
+    marginLeft: Spacing.medium.margin,
   },
   headerBackground: {
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10,
+    marginBottom: Spacing.small.margin,
   },
   loadingOverlay: {
     height: 160,
     width: 250,
-    backgroundColor: '#fff',
-    borderColor: '#fff',
-    borderWidth: 2,
-    borderRadius: 10,
+    ...AtomicStyles.roundedContainer,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   loadingText: {
     color: '#007bff',
     textTransform: 'uppercase',
-    marginTop: 10,
-    textAlign: 'center'
+    marginTop: Spacing.small.margin,
+    textAlign: 'center',
   },
-  // Estilos que no se pudieron unificar
-  scheduleItem: { //MuseumDetails
+  scheduleItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 5,
+    marginBottom: Spacing.small.margin,
   },
-  day: { //MuseumDetails
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  time: { //MuseumDetails
+  day: {
+    ...Typography.boldText,
     fontSize: 16,
   },
-  tariffItem: { //MuseumDetails
+  time: {
+    fontSize: 16,
+  },
+  tariffItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 5,
+    marginBottom: Spacing.small.margin,
   },
-  tariffType: { //MuseumDetails
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  tariffPrice: { //MuseumDetails
+  tariffType: {
+    ...Typography.boldText,
     fontSize: 16,
   },
-  contactItem: { //MuseumDetails
+  tariffPrice: {
+    fontSize: 16,
+  },
+  contactItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 5,
+    marginBottom: Spacing.small.margin,
   },
-  contactLabel: { //MuseumDetails
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  contactInfo: { //MuseumDetails
+  contactLabel: {
+    ...Typography.boldText,
     fontSize: 16,
   },
-  logo: { //HomeStack & AboutStack
+  contactInfo: {
+    fontSize: 16,
+  },
+  logo: {
     width: 90,
     height: 45,
     resizeMode: 'contain',
     marginLeft: -30,
   },
-  headerContainer: { //HomeStack & AboutStack
+  headerContainer: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  museumName: { //MuseumDetails
+  museumName: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#fff',
+    color: Colors.white,
   },
-  location: { //MuseumDetails
+  location: {
     fontSize: 16,
-    color: '#fff',
-    marginTop: 10,
+    color: Colors.white,
+    marginTop: Spacing.small.margin,
   },
 });
