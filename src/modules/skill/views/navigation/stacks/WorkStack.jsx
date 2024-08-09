@@ -11,8 +11,11 @@ export default function WorkStack() {
     <Stack.Navigator
       initialRouteName='worksListScreen'
       screenOptions={{
-        headerMode: 'screen',
-        headerTitleAlign: 'center'
+        headerStyle: {
+          backgroundColor: '#7197b7',
+        },
+        headerTitleAlign: 'left',
+        headerTintColor: '#fff'
       }}
     >
       <Stack.Screen

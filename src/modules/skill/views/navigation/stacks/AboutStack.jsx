@@ -2,8 +2,9 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AboutScreen from "../../components/screens/AboutScreen";
 
-import logoImage from '../../../../../../assets/images/logo.png';
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
+import GlobalStyles from "../../../../../../assets/styles/GlobalStyles";
+import logoImage from '../../../../../../assets/images/LogoRelleno.png';
 
 const Stack = createStackNavigator();
 
@@ -12,14 +13,17 @@ export default function AboutStack() {
         <Stack.Navigator
             initialRouteName='aboutScreen'
             screenOptions={{
-                headerMode: "screen",
+                headerStyle: {
+                    backgroundColor: '#7197b7',
+                },
+                headerTitleAlign: 'left',
                 headerTitle: () => (
-                    <View style={styles.headerContainer}>
+                    <View style={GlobalStyles.headerContainer}>
                         <Image
                             source={logoImage}
-                            style={styles.logo}
+                            style={GlobalStyles.headerLogo}
                         />
-                        <Text style={styles.title}>Acerca de Museepa</Text>
+                        <Text style={GlobalStyles.headerTitle}>Acerca de</Text>
                     </View>
                 ),
             }}
@@ -31,22 +35,3 @@ export default function AboutStack() {
         </Stack.Navigator>
     )
 }
-
-const styles = StyleSheet.create({
-    headerContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    logo: {
-        width: 90,
-        height: 45,
-        resizeMode: 'contain',
-        marginLeft: -30,
-    },
-    title: {
-        marginLeft: -20,
-        fontSize: 25,
-        fontWeight: 'bold',
-    },
-});

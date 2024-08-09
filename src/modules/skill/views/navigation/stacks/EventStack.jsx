@@ -11,8 +11,11 @@ export default function EventStack() {
     <Stack.Navigator
       initialRouteName='eventsListScreen'
       screenOptions={{
-        headerMode: 'screen',
-        headerTitleAlign: 'center'
+        headerStyle: {
+          backgroundColor: '#7197b7',
+        },
+        headerTitleAlign: 'left',
+        headerTintColor: '#fff'
       }}
     >
       <Stack.Screen

@@ -1,14 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Linking, TouchableOpacity } from 'react-native';
+import GlobalStyles from '../../../../../../assets/styles/GlobalStyles';
 
 export default function AboutScreen() {
   const handleWebsitePress = () => {
-    Linking.openURL('https://www.google.com'); // Reemplaza con tu URL
+    Linking.openURL('https://www.google.com');
   };
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.content}>
+      <View >
         <Text style={styles.title}>Acerca de Musepa</Text>
         <Text style={styles.description}>
           Proporcionar información del museo de forma rápida y sencilla.
@@ -19,15 +20,15 @@ export default function AboutScreen() {
 
         <Text style={styles.sectionTitle}>Desarrolladores</Text>
         <View style={styles.developersList}>
-          <Text style={styles.developerName}>• Juan Pérez</Text>
-          <Text style={styles.developerName}>• María González</Text>
-          <Text style={styles.developerName}>• Carlos Rodríguez</Text>
-          <Text style={styles.developerName}>• Sofía López</Text>
-          <Text style={styles.developerName}>• Luis Martínez</Text>
+          <Text style={styles.developerName}>• Bustos Anna Christina</Text>
+          <Text style={styles.developerName}>• Campos Román Cristian Alexis</Text>
+          <Text style={styles.developerName}>• Flores Santana Pablo Samuel</Text>
+          <Text style={styles.developerName}>• Herrera Hernadez Joel Alejandro</Text>
+          <Text style={styles.developerName}>• Morellano Alvarez Alejandro</Text>
         </View>
 
         <TouchableOpacity style={styles.websiteButton} onPress={handleWebsitePress}>
-          <Text style={styles.websiteButtonText}>Visita nuestro sitio web</Text>
+          <Text style={styles.websiteButtonText}>¡Visita la versión web!</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -36,17 +37,14 @@ export default function AboutScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  content: {
+    ...GlobalStyles.container,
     padding: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#d8a35f',
+    color: '#dba669',
   },
   description: {
     fontSize: 16,
@@ -65,7 +63,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   websiteButton: {
-    backgroundColor: '#d8a35f',
+    backgroundColor: '#dba669',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',

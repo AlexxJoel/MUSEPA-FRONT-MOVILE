@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
+import GlobalStyles from '../../../../../../assets/styles/GlobalStyles';
 
 // Importa las imágenes locales
 import homeImage from '../../../../../../assets/images/home.jpg';
@@ -59,14 +60,13 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    ...GlobalStyles.container
   },
   headerBackground: {
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10,
+    marginBottom: 20,
   },
   title: {
     fontSize: 24,
@@ -83,10 +83,9 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   card: {
-    marginBottom: 20,
+    marginBottom: 30,
     borderRadius: 10,
     overflow: 'hidden',
-    marginBottom: 20,
     paddingHorizontal: 20,
   },
   cardImage: {

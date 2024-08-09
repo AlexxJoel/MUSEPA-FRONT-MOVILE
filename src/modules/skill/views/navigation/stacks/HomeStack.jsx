@@ -1,6 +1,7 @@
 import React from "react";
-import { Image, Text, View, StyleSheet } from "react-native";
+import { Image, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
+import GlobalStyles from "../../../../../../assets/styles/GlobalStyles";
 
 import MuseumStack from "./MuseumStack";
 import EventStack from "./EventStack";
@@ -8,7 +9,7 @@ import WorkStack from "./WorkStack";
 
 import HomeScreen from "../../components/screens/HomeScreen";
 
-import logoImage from '../../../../../../assets/images/logo.png';
+import logoImage from '../../../../../../assets/images/LogoRelleno.png';
 
 const Stack = createStackNavigator();
 
@@ -17,14 +18,17 @@ export default function HomeStack() {
         <Stack.Navigator
             initialRouteName="homeScreen"
             screenOptions={{
-                headerMode: "screen",
+                headerStyle: {
+                    backgroundColor: '#7197b7',
+                },
+                headerTitleAlign: 'left',
                 headerTitle: () => (
-                    <View style={styles.headerContainer}>
+                    <View style={GlobalStyles.headerContainer}>
                         <Image
                             source={logoImage}
-                            style={styles.logo}
+                            style={GlobalStyles.headerLogo}
                         />
-                        <Text style={styles.title}>Museepa</Text>
+                        <Text style={GlobalStyles.headerTitle}>MUSEEPA</Text>
                     </View>
                 ),
             }}
@@ -51,22 +55,3 @@ export default function HomeStack() {
         </Stack.Navigator>
     )
 }
-
-const styles = StyleSheet.create({
-    headerContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    logo: {
-        width: 90,
-        height: 45,
-        resizeMode: 'contain',
-        marginLeft: -30,
-    },
-    title: {
-        marginLeft: -20,
-        fontSize: 25,
-        fontWeight: 'bold',
-    },
-});

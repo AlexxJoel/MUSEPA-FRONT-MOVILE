@@ -4,8 +4,9 @@ import moment from 'moment';
 import { MaterialIcons } from '@expo/vector-icons';
 import Loading from '../../shared/Loading';
 import { getWorksList } from '../../../../controllers/SkillController';
+import GlobalStyles from '../../../../../../../assets/styles/GlobalStyles';
 
-export default function WorksListScreen() {
+export default function WorksListScreen({ navigation }) {
   const [works, setWorks] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -22,8 +23,8 @@ export default function WorksListScreen() {
     try {
       const response = await getWorksList(page - 1, pageSize);
       if (response.status === 204) {
+        setWorks([]);
         setNoWorksFound(true);
-        setWorks(null);
       } else {
         const data = response.data.data;
         setWorks(data);
@@ -33,6 +34,9 @@ export default function WorksListScreen() {
       setHasError(false);
     } catch (error) {
       console.error(error);
+      setTotalPages(1)
+      setWorks([]);
+      setNoWorksFound(false);
       setHasError(true);
     } finally {
       setShowLoading(false);
@@ -56,19 +60,19 @@ export default function WorksListScreen() {
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.card} onPress={() => {/* Navegación a detalles de la obra */ }}>
-      <View style={styles.cardContent}>
-        <View style={styles.cardTextContainer}>
-          <Text style={styles.cardTitle}>{item.title}</Text>
-          <Text style={styles.cardDescription}>{item.description}</Text>
-          <Text style={styles.cardDate}>
+    <TouchableOpacity style={GlobalStyles.card} onPress={() => { navigation.navigate("workDetailsScreen", {work: item}) }}>
+      <View style={GlobalStyles.cardContent}>
+        <View style={GlobalStyles.cardTextContainer}>
+          <Text style={GlobalStyles.cardTitle}>{item.title}</Text>
+          <Text style={GlobalStyles.cardDescription}>{item.description}</Text>
+          <Text style={GlobalStyles.cardExtraDescription}>
             {moment(item.creation_date).format('DD/MM/YYYY')}
           </Text>
-          <Text style={styles.cardTechnique}>Técnica: {item.technique}</Text>
-          <Text style={styles.cardArtists}>Artistas: {item.artists.join(', ')}</Text>
+          <Text style={GlobalStyles.cardExtraDescription}>Técnica: {item.technique}</Text>
+          <Text style={GlobalStyles.cardExtraDescription}>Artistas: {item.artists.join(', ')}</Text>
         </View>
         {item.pictures && (
-          <Image source={{ uri: item.pictures }} style={styles.cardImage} />
+          <Image source={{ uri: item.pictures[0] }} style={GlobalStyles.cardImage} />
         )}
       </View>
     </TouchableOpacity>
@@ -77,13 +81,21 @@ export default function WorksListScreen() {
   return (
     <View style={styles.container}>
       {hasError && (
-        <View style={styles.errorContainer}>
+        <View style={GlobalStyles.errorContainer}>
           <MaterialIcons name="error-outline" size={50} color="#d9534f" />
-          <Text style={styles.errorTitle}>Error</Text>
-          <Text style={styles.errorText}>No se pudo recuperar la información de las obras. Por favor, intente de nuevo más tarde.</Text>
-          <TouchableOpacity style={styles.reloadButton} onPress={fetchWorks}>
-            <Text style={styles.reloadButtonText}>Reintentar</Text>
+          <Text style={GlobalStyles.errorTitle}>Error</Text>
+          <Text style={GlobalStyles.errorText}>No se pudo recuperar la información de las obras. Por favor, intente de nuevo más tarde.</Text>
+          <TouchableOpacity style={GlobalStyles.reloadButton} onPress={fetchWorks}>
+            <Text style={GlobalStyles.reloadButtonText}>Reintentar</Text>
           </TouchableOpacity>
+        </View>
+      )}
+
+      {noWorksFound && (
+        <View style={GlobalStyles.noItemsContainer}>
+          <MaterialIcons name="cancel" size={50} color="#6c757d" />
+          <Text style={GlobalStyles.noItemsTitle}>Sin obras</Text>
+          <Text style={GlobalStyles.noItemsText}>No se encontraron obras en esta consulta.</Text>
         </View>
       )}
 
@@ -93,14 +105,6 @@ export default function WorksListScreen() {
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
         />
-      )}
-
-      {noWorksFound && (
-        <View style={styles.noWorksContainer}>
-          <MaterialIcons name="cancel" size={50} color="#6c757d" />
-          <Text style={styles.noWorksTitle}>Sin obras</Text>
-          <Text style={styles.noWorksText}>No se encontraron obras en esta consulta.</Text>
-        </View>
       )}
 
       <View style={styles.paginationContainer}>
@@ -146,128 +150,14 @@ export default function WorksListScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    ...GlobalStyles.container,
     padding: 20,
   },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
-    margin: 5,
-  },
-  cardContent: {
-    flexDirection: 'row',
-    padding: 10,
-  },
-  cardTextContainer: {
-    flex: 1,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  cardDescription: {
-    fontSize: 14,
-    marginBottom: 5,
-  },
-  cardDate: {
-    fontSize: 12,
-    color: '#888',
-  },
-  cardTechnique: {
-    fontSize: 12,
-    color: '#888',
-    marginTop: 5,
-  },
-  cardArtists: {
-    fontSize: 12,
-    color: '#888',
-    marginTop: 5,
-  },
-  cardImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 10,
-  },
-  errorContainer: {
-    backgroundColor: '#f8d7da',
-    borderRadius: 10,
-    padding: 20,
-    marginBottom: 20,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#d9534f',
-    shadowColor: '#d9534f',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 3,
-  },
-  errorTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#d9534f',
-    marginTop: 10,
-  },
-  errorText: {
-    fontSize: 16,
-    color: '#721c24',
-    textAlign: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  reloadButton: {
-    backgroundColor: '#d9534f',
-    borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-  },
-  reloadButtonText: {
-    fontSize: 16,
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  noWorksContainer: {
-    backgroundColor: '#e9ecef',
-    borderRadius: 10,
-    padding: 20,
-    marginBottom: 20,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ced4da',
-    shadowColor: '#6c757d',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 3,
-  },
-  noWorksTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#6c757d',
-    marginTop: 10,
-  },
-  noWorksText: {
-    fontSize: 16,
-    color: '#495057',
-    textAlign: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
+
+  // Consult
   paginationContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    ...GlobalStyles.inputContainer,
     justifyContent: 'space-between',
-    backgroundColor: '#d8a35f',
-    borderRadius: 10,
-    padding: 10,
-    marginTop: 20,
   },
   pageSizeContainer: {
     flexDirection: 'row',
