@@ -1,12 +1,12 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import AboutScreen from "../../components/screens/AboutScreen";
 
 import { Image, Text, View } from "react-native";
 import GlobalStyles from "../../../../../../assets/styles/GlobalStyles";
 import logoImage from '../../../../../../assets/images/LogoRelleno.png';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function AboutStack() {
     return (

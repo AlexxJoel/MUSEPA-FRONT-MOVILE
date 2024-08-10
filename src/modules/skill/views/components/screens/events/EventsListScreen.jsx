@@ -1,44 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Platform } from 'react-native';
 import moment from 'moment';
 import { MaterialIcons } from '@expo/vector-icons';
 import GlobalStyles from '../../../../../../../assets/styles/GlobalStyles';
 import Loading from '../../shared/Loading';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { getEventsByDate } from '../../../../controllers/SkillController';
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
 const getCurrentDate = () => {
   return moment().format('YYYY-MM-DD');
 };
 
-export default function EventsListScreen({navigation}) {
+export default function EventsListScreen({ navigation }) {
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(getCurrentDate());
-  const [showDatePicker, setShowDatePicker] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   const [textLoading, setTextLoading] = useState('');
-  const [noEventsFound, setNoEventsFound] = useState(false); // Nuevo estado
+  const [noEventsFound, setNoEventsFound] = useState(false);
 
   const fetchEvents = async () => {
     setShowLoading(true);
     setTextLoading('Cargando eventos...');
-    setNoEventsFound(false); // Reiniciar estado al cargar nuevos eventos
+    setNoEventsFound(false);
     try {
       const response = await getEventsByDate(selectedDate);
       if (response.status === 204) {
         setEvents([]);
-        setNoEventsFound(true); // Mostrar mensaje si no hay eventos
+        setNoEventsFound(true);
       } else {
         const data = response.data.data;
         setEvents(data);
-        setNoEventsFound(false); // Ocultar mensaje si hay eventos
+        setNoEventsFound(false);
       }
       setHasError(false);
     } catch (error) {
       console.error(error);
-      setEvents([])
-      setNoEventsFound(false)
+      setEvents([]);
+      setNoEventsFound(false);
       setHasError(true);
     } finally {
       setShowLoading(false);
@@ -50,13 +49,22 @@ export default function EventsListScreen({navigation}) {
     fetchEvents();
   }, [selectedDate]);
 
-  const handleSelectedDate = (date) => {
-    setSelectedDate(moment(date).format('YYYY-MM-DD'));
-    setShowDatePicker(false);
+  const handleSelectedDate = (event, date) => {
+    if (date !== undefined) {
+      setSelectedDate(moment(date).format('YYYY-MM-DD'));
+    }
+  };
+
+  const showDatePicker = () => {
+    DateTimePickerAndroid.open({
+      value: new Date(selectedDate),
+      mode: 'date',
+      onChange: handleSelectedDate,
+    });
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={GlobalStyles.card} onPress={() => {navigation.navigate("eventDetailsScreen", {event: item})}}>
+    <TouchableOpacity style={GlobalStyles.card} onPress={() => { navigation.navigate("eventDetailsScreen", { event: item }) }}>
       <View style={GlobalStyles.cardContent}>
         <View style={GlobalStyles.cardTextContainer}>
           <Text style={GlobalStyles.cardTitle}>{item.name}</Text>
@@ -85,7 +93,7 @@ export default function EventsListScreen({navigation}) {
         </View>
       )}
 
-      {noEventsFound && ( // Mostrar mensaje si no se encontraron eventos
+      {noEventsFound && (
         <View style={GlobalStyles.noItemsContainer}>
           <MaterialIcons name="event-busy" size={50} color="#6c757d" />
           <Text style={GlobalStyles.noItemsTitle}>Sin eventos</Text>
@@ -94,24 +102,22 @@ export default function EventsListScreen({navigation}) {
       )}
 
       {events && (
-        <>
-          <FlatList
-            data={events}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id.toString()}
-          />
-        </>
+        <FlatList
+          data={events}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
       )}
 
       <View style={styles.dateSelectorContainer}>
         <TouchableOpacity
           style={styles.dateButton}
-          onPress={() => handleSelectedDate(moment(selectedDate).subtract(1, 'day'))}
+          onPress={() => setSelectedDate(moment(selectedDate).subtract(1, 'day').format('YYYY-MM-DD'))}
         >
           <MaterialIcons name="chevron-left" size={24} color="#fff" />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+        <TouchableOpacity onPress={showDatePicker}>
           <Text style={styles.dateText}>
             {moment(selectedDate).format('DD/MM/YYYY')}
           </Text>
@@ -119,19 +125,11 @@ export default function EventsListScreen({navigation}) {
 
         <TouchableOpacity
           style={styles.dateButton}
-          onPress={() => handleSelectedDate(moment(selectedDate).add(1, 'day'))}
+          onPress={() => setSelectedDate(moment(selectedDate).add(1, 'day').format('YYYY-MM-DD'))}
         >
           <MaterialIcons name="chevron-right" size={24} color="#fff" />
         </TouchableOpacity>
       </View>
-
-      <DateTimePickerModal
-        date={new Date(selectedDate)}
-        isVisible={showDatePicker}
-        mode="date"
-        onConfirm={handleSelectedDate}
-        onCancel={() => setShowDatePicker(false)}
-      />
 
       <Loading show={showLoading} text={textLoading} />
     </View>

@@ -5,7 +5,7 @@
                 "buildType": "apk"
             },
             "env": {
-                "BASE_URL": "apirul"
+                "BASE_URL": "apiUrl"
             }
         },
         "preview2": {

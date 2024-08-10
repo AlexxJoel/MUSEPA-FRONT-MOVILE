@@ -1,10 +1,10 @@
 import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import WorksListScreen from '../../components/screens/works/WorksListScreen'
 import WorkDetailsScreen from '../../components/screens/works/WorkDetailsScreen'
 
-const Stack = createStackNavigator()
+const Stack = createNativeStackNavigator()
 
 export default function WorkStack() {
   return (

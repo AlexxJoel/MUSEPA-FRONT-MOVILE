@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import GlobalStyles from "../../../../../../assets/styles/GlobalStyles";
 
 import MuseumStack from "./MuseumStack";
@@ -11,7 +11,7 @@ import HomeScreen from "../../components/screens/HomeScreen";
 
 import logoImage from '../../../../../../assets/images/LogoRelleno.png';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function HomeStack() {
     return (

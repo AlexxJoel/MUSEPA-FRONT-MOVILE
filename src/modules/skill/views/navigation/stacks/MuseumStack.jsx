@@ -1,9 +1,9 @@
 import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import MuseumDetailsScreen from '../../components/screens/museum/MuseumDetailsScreen'
 
-const Stack = createStackNavigator()
+const Stack = createNativeStackNavigator()
 
 export default function MuseumStack() {
   return (
