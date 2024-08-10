@@ -6,9 +6,9 @@ module.exports = function(api) {
       [
         'module:react-native-dotenv',
         {
-          path: '.env',          // Ruta a tu archivo .env
-          safe: false,           // Si solo quieres cargar variables definidas en un archivo .env.example
-          allowUndefined: true,  // Si quieres permitir variables sin valor
+          path: '.env',
+          safe: false,
+          allowUndefined: true, 
         },
       ],
     ],

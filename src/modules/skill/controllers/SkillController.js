@@ -12,7 +12,7 @@ export const getCurrentEvents = async () => {
 
 export const getEventDetails = async (eventName) => {
     try {
-        const response = await AxiosClient.get(`//get_event_details?event_name=${eventName}`)
+        const response = await AxiosClient.get(`/get_event_details?event_name=${eventName}`)
         return response;
     } catch (error) {
         console.error(error);

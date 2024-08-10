@@ -4,24 +4,33 @@
     "slug": "MUSEPA-FRONT-MOVILE",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/LogoRelleno.png",
+    "icon": "./assets/images/LogoIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/images/logo.png",
+      "image": "./assets/images/LogoSplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.pablosflores.MUSEPAFRONTMOVILE",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/LogoRelleno.png",
+        "foregroundImage": "./assets/images/LogoIcon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
       "favicon": "./assets/images/LogoRelleno.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d037a7b5-c297-43d7-8764-1b7194514525"
+      }
     }
   }
 }

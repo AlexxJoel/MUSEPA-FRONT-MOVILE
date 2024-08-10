@@ -1,0 +1,24 @@
+{
+    "build": {
+        "preview": {
+            "android": {
+                "buildType": "apk"
+            },
+            "env": {
+                "BASE_URL": "apirul"
+            }
+        },
+        "preview2": {
+            "android": {
+                "gradleCommand": ":app:assembleRelease"
+            }
+        },
+        "preview3": {
+            "developmentClient": true
+        },
+        "preview4": {
+            "distribution": "internal"
+        },
+        "production": {}
+    }
+}
